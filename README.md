@@ -4,7 +4,7 @@ Magic Card Collector App
 
 ##TODO
 
-- Search for MagicCard Api - maybe this one? (https://docs.magicthegathering.io)
+- Search for MagicCard Api - maybe this one? https://docs.magicthegathering.io, or https://scryfall.com/docs/api because there is an availabilty to download the whole datebase conatining card information instead using remote hosted API
 - Implement Communication with Api via BloC Pattern
 - Design Layout for Flutter App
 
