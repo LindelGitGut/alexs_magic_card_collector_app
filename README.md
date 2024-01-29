@@ -4,7 +4,7 @@ Magic Card Collector App
 
 ##TODO
 
-- Search for MagicCard Api
+- Search for MagicCard Api - maybe this one? (https://docs.magicthegathering.io)
 - Implement Communication with Api via BloC Pattern
 - Design Layout for Flutter App
 
