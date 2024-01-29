@@ -23,7 +23,8 @@ Future<Widget> searchBar({required Function themeCallBack}) async {
           message: 'Change brightness mode',
           child: IconButton(
             isSelected: isdark,
-            onPressed: () {
+            onPressed: () async {
+              isdark = await getThemeFromSharedPrefs();
               themeCallBack(!isdark);
               saveThemeInSharedPrefs(!isdark);
             },
@@ -51,6 +52,7 @@ Future<Widget> searchBar({required Function themeCallBack}) async {
 Future<void> saveThemeInSharedPrefs(bool isdark) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setBool('darktheme', isdark);
+  print("Darktheme in Shared prefs gesichert: " + isdark.toString());
 }
 
 
@@ -59,8 +61,10 @@ Future<bool> getThemeFromSharedPrefs() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   bool value = prefs.getBool("darktheme") ?? false;
   if (value == null || value == false) {
+    print("Theme aus sharedPrefs geladen, Darktheme: false");
     return false;
   } else {
+    print("Theme aus sharedPrefs geladen, Darktheme: true");
     return true;
   }
 }
