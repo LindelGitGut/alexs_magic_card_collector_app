@@ -9,7 +9,9 @@ part 'card_collector_state.dart';
 class CardCollectorBloc extends Bloc<CardCollectorEvent, CardCollectorState> {
   CardCollectorBloc() : super(CardCollectorInitial()) {
     on<CardCollectorEvent>((event, emit) {
-      // TODO: implement event handler
+
+
+
     });
   }
 }

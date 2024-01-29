@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 
+import 'cardtile.dart';
+
 Widget cardGridView() {
   return Expanded(
     child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3, // Anzahl der Spalten
+          crossAxisCount: 2, // Anzahl der Spalten
         ),
-        itemCount: 1, //items.length,
+        itemCount: 2, //items.length,
         itemBuilder: (context, index) {
-          return Card(
-            child: Center(
-              child: Text("Testtext"),
-            ),
-          );
+          return getMagicCardTile();
         }),
   );
 }
