@@ -2,15 +2,22 @@
 
 Magic Card Collector App
 
-## Getting Started
+##TODO
 
-This project is a starting point for a Flutter application.
+- Search for MagicCard Api
+- Implement Communication with Api via BloC Pattern
+- Design Layout for Flutter App
 
-A few resources to get you started if this is your first Flutter project:
+## Planned Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Show All Cards as GridView
+- Differend Grid Sizes
+- Enable Search by Card name or Card ID
+- Mark Card as Collected
+- Mark Card for Whishlist
+- Show all Cards wich you Collected
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## nice to have
+
+- Creatng User Account which saves all stored information about you Collected Cards
+- Message System between registered Users
