@@ -15,7 +15,8 @@ Magic Card Collector App
 - Enable Search by Card name or Card ID
 - Mark Card as Collected
 - Mark Card for Whishlist
-- Show all Cards wich you Collected
+- Show all Cards which you Collected
+- Enable different filters (Element, Card Type, Rarity ....)
 
 ## nice to have
 
