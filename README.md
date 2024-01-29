@@ -21,3 +21,8 @@ Magic Card Collector App
 
 - Creatng User Account which saves all stored information about you Collected Cards
 - Message System between registered Users
+
+
+# maybe this could make this app even better
+
+-ocr reader whchich takes the indentifier in the left bottom cornder and shows the result on moble app (posibillity to add the scanned Card via Dialog)
