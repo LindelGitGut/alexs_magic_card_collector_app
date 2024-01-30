@@ -4,7 +4,10 @@ Magic Card Collector App
 
 ##TODO
 
-- Search for MagicCard Api - maybe this one? https://docs.magicthegathering.io, or https://scryfall.com/docs/api because there is an availabilty to download the whole datebase conatining card information instead using remote hosted API
+- Using Datasets from  https://scryfall.com/docs/api because there is an availabilty to download the bulk data conatining card information instead using remote hosted API
+    -bulk Data is 1,9 GB - it would make sense to write an own API (maybe Springboot) which contains bulk data whcih is provided by scryfall - bulk data could be automaticly downloaded once a month
+    - bulk data could be stored in an Database instead of an single Json File
+    - images are not inside of bulk data, but the corresponding image url present in bulk data, therfore we must test if we should download all images once and store it in database or load images direktly from povided url via App
 - Implement Communication with Api via BloC Pattern
 - Design Layout for Flutter App
 
