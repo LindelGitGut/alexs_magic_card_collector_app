@@ -97,7 +97,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       Exception("Searchbar has thrown an Error"));
                 }
               }),
+          SizedBox(height: 20.0,),
           cardGridView(),
+
         ],
       ),
     );
