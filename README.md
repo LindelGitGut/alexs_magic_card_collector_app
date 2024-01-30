@@ -2,6 +2,12 @@
 
 Magic Card Collector App
 
+
+App for tracking collected Magic The Gathering Cards, Written in Flutter, attempt to use BloC Pattern
+
+(optional: make own API with Springboot, holding Magic Card Bulk Data within Database, (download all Imagefiles and link them corresponding in DB)
+
+
 ##TODO
 
 - Using Datasets from  https://scryfall.com/docs/api because there is an availabilty to download the bulk data conatining card information instead using remote hosted API
