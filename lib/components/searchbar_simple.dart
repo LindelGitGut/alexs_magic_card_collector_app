@@ -1,8 +1,12 @@
+import 'package:alexs_magic_card_collector_app/data/cardmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<Widget> searchBar({required Function themeCallBack}) async {
+import '../services/autocomplete.dart';
+import '../services/jsonservice.dart';
+
+Future<Widget> searchBar({required Function themeCallBack, required Function updateCardResults}) async {
   bool isdark = await getThemeFromSharedPrefs();
 
   return SearchAnchor(
@@ -34,7 +38,27 @@ Future<Widget> searchBar({required Function themeCallBack}) async {
         )
       ],
     );
-  }, suggestionsBuilder: (BuildContext context, SearchController controller) {
+  }, suggestionsBuilder: (BuildContext context, SearchController controller) async {
+    List<String> suggestions = await AutocompleteService.getAutocompleteSuggestions(
+      path: 'lib/assets/card-bulk-example.json', // Pfad zur JSON-Datei
+      attributeKeys: ['name','type_lines', /*'set' , 'set_name', 'collector_number'*/], // Der Schlüssel für die Autovervollständigung
+      query: controller.text, // Die aktuelle Benutzereingabe
+    );
+    // Generieren der ListTile-Liste basierend auf den Vorschlägen
+    return suggestions.map((String item) {
+      return ListTile(
+        title: Text(item),
+        onTap: () async {
+          MagicCardModel cardModel = await ReadJsonFile.getMagicCardModelViaName(name: item);
+          updateCardResults(cardModel);
+          // Hier können Sie definieren, was passieren soll, wenn ein Vorschlag ausgewählt wird
+          controller.closeView(item);
+        },
+      );
+    }).toList();
+
+
+        /*
     return List<ListTile>.generate(5, (int index) {
       final String item = 'item $index';
       return ListTile(
@@ -46,7 +70,7 @@ Future<Widget> searchBar({required Function themeCallBack}) async {
         },
       );
     });
-  });
+  */});
 }
 
 Future<void> saveThemeInSharedPrefs(bool isdark) async {

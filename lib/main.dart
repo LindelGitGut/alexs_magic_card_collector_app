@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'components/CardGridView.dart';
 import 'components/left_menu_drawer.dart';
 import 'components/searchbar_simple.dart';
+import 'data/cardmodel.dart';
 
 void main() {
   runApp(MyApp());
@@ -67,6 +68,10 @@ class MyHomePage extends StatefulWidget {
 
   final String title;
   final Function(bool) themeCallBack;
+  List<MagicCardModel> cardresults = [];
+
+
+
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -75,6 +80,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _showingcards = 0;
   final bool isDark = false;
+
+  void updateCardResults (MagicCardModel cardModel) {
+    widget.cardresults.add(cardModel);
+    print("updateCardresults aufgerufen! : " +widget.cardresults.toString());
+
+  setState(() {
+
+  });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: [
           FutureBuilder(
-              future: searchBar(themeCallBack: widget.themeCallBack),
+              future: searchBar(themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults),
               builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
                 if (snapshot.hasData) {
                   return snapshot.data as Widget;
@@ -98,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }
               }),
           SizedBox(height: 20.0,),
-          cardGridView(),
+          cardGridView(widget.cardresults, context),
 
         ],
       ),

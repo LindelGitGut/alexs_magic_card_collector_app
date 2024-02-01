@@ -1,11 +1,26 @@
+import 'package:alexs_magic_card_collector_app/data/cardmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Card getMagicCardTile(String cardname, String illustratiourl) {
+import '../services/jsonservice.dart';
+import '../views/detailedcardview.dart';
+
+Card getMagicCardTile(MagicCardModel cardModel, BuildContext context) {
   return Card(
       child: GestureDetector(
     onTap: () {
       print("Tap Detected!");
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) =>  DetailedCardView(cardModel: cardModel)),
+      );
+
+
+      //Debugging , TODO remove
+
+
+
+      
     },
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -13,13 +28,13 @@ Card getMagicCardTile(String cardname, String illustratiourl) {
       children: [
         Expanded(
           child: Image.network(
-            'https://cards.scryfall.io/small/front/0/0/000366c8-7a43-49d7-a103-ac5bd7efd9aa.jpg?1562052318',
+            cardModel.illustrationUrl!,
             fit: BoxFit.cover,
           ),
         ),
         FittedBox(
           fit: BoxFit.fitWidth,
-          child: Text("MagicCardName"),
+          child: Text(cardModel.name!),
         ),
       ],
     ),
