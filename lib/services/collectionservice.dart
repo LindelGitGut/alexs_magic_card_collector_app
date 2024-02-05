@@ -43,11 +43,10 @@ void removeCollection({required String collectionname}) async {
     prefs.setStringList("collections", collections);
 }
 
-List<String> getCollection(String collectionname){
-
-    //TODO Implement function
-
-    return [];
+Future<List<String>> getCollections() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List <String> collections = prefs.getStringList("collections") ?? [];
+    return collections;
 }
 
 // wishlist function
