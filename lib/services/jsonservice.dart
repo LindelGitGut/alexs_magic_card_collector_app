@@ -67,7 +67,7 @@ class ReadJsonFile {
       textBox: result['oracle_text'],
       rarity: result['rarity'],
       //TODO check if Symbol of set can be obtrained
-      setSymbol: "",
+      set: "",
       collectorNumber:result['collector_number'],
       editionName: result['set_name'],
       legalStatus: result['legalities'] != null ? jsonEncode(result['legalities']) : null,);
@@ -99,7 +99,7 @@ class ReadJsonFile {
         textBox: result['oracle_text'],
         rarity: result['rarity'],
         //TODO check if Symbol of set can be obtrained
-        setSymbol: "",
+        set: "",
         collectorNumber:result['collector_number'],
         editionName: result['set_name'],
         legalStatus: result['legalities'] != null ? jsonEncode(result['legalities']) : null,);

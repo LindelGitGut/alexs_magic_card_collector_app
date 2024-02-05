@@ -1,20 +1,26 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Usercollection {
+class Collectionservice {
 
 
 //collected functions
 
-  void addCardToCollected ({String collectionname = "default" ,required String set, required String collector_number}) async {
+  static void addCardToCollected ({String collectionname = "default" ,required String set, required String collector_number}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> collectionlist = prefs.getStringList(collectionname) ?? [];
     print("Debug addCardToCollected, erhaltene Liste: $collectionlist");
+
+    //check if List already contains Card
+
+    if (!collectionlist.contains("set: $set, collector_number: $collector_number")){
     collectionlist.add("set: $set, collector_number: $collector_number");
     print("Debug addCardToCollected, erhaltene Liste nach add: $collectionlist");
-    prefs.setStringList(collectionname, collectionlist);
+    prefs.setStringList(collectionname, collectionlist);}
+
+    else {print("Card is already marked as collected");}
 
 }
-void removeCardFromCollected({String collectionname = "default", required String set, required String collector_number}) async {
+static void removeCardFromCollected({String collectionname = "default", required String set, required String collector_number}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> collectionlist = prefs.getStringList(collectionname) ?? [];
     print("Debug removeCardfromCollected, erhaltene Liste: $collectionlist");
@@ -27,12 +33,12 @@ void removeCardFromCollected({String collectionname = "default", required String
 
 //Collection functions
 
-void createCollection({required String collectionname}) async {
+static void createCollection({required String collectionname}) async {
      SharedPreferences prefs = await SharedPreferences.getInstance();
      List<String> collections = prefs.getStringList("collections") ?? [];
      collections.add(collectionname);
 }
-void removeCollection({required String collectionname}) async {
+static void removeCollection({required String collectionname}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> collections = prefs.getStringList("collections") ?? [];
     try{collections.remove(collectionname); }
@@ -43,7 +49,7 @@ void removeCollection({required String collectionname}) async {
     prefs.setStringList("collections", collections);
 }
 
-Future<List<String>> getCollections() async {
+static Future<List<String>> getCollections() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List <String> collections = prefs.getStringList("collections") ?? [];
     return collections;
@@ -51,20 +57,20 @@ Future<List<String>> getCollections() async {
 
 // wishlist function
 
-createWishList({required String wishlistname}) async {
+static createWishList({required String wishlistname}) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       List<String> wishlists =  prefs.getStringList("wishlists") ?? [];
       wishlists.add(wishlistname);
       prefs.setStringList("wishlists", wishlists);
 }
-removeWishList({required String wishlistname}) async {
+static removeWishList({required String wishlistname}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> wishlists =  prefs.getStringList("wishlists") ?? [];
     wishlists.remove(wishlistname);
     prefs.setStringList("wishlists", wishlists);
 }
 
-Future<List<String>> getWishLists() async {
+static Future<List<String>> getWishLists() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> wishlists =  prefs.getStringList("wishlists") ?? [];
     return wishlists;
@@ -72,19 +78,19 @@ Future<List<String>> getWishLists() async {
 
 //Single Wishlist function
 
-addCardToWishlist({String wishlistname = "default", required String set, required String collectornumber }) async {
+static addCardToWishlist({String wishlistname = "default", required String set, required String collectornumber }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> cards = prefs.getStringList(wishlistname) ?? [];
     cards.add("set: $set, collector_number: $collectornumber");
 
 }
-removeCardFromWishlist({String wishlistname = "default", required String set, required String collectornumber }) async {
+static removeCardFromWishlist({String wishlistname = "default", required String set, required String collectornumber }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> cards = prefs.getStringList(wishlistname) ?? [];
     cards.remove("set: $set, collector_number: $collectornumber");
 }
 
-Future<List<String>> getCardsFromWishList ({String wishlistname = "default"}) async {
+static Future<List<String>> getCardsFromWishList ({String wishlistname = "default"}) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       List <String> cards = prefs.getStringList(wishlistname) ?? [];
       return cards;

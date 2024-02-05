@@ -16,7 +16,7 @@ class MagicCardModel extends Equatable {
   late String? typeSpecificInfo;
   late String? textBox;
   late String? rarity;
-  late String? setSymbol;
+  late String? set;
   late String? collectorNumber;
   late String? editionName;
   late String? legalStatus;
@@ -35,7 +35,7 @@ class MagicCardModel extends Equatable {
     required this.typeSpecificInfo,
     required this.textBox,
     required this.rarity,
-    required this.setSymbol,
+    required this.set,
     required this.collectorNumber,
     required this.editionName,
     required this.legalStatus,
@@ -58,7 +58,7 @@ class MagicCardModel extends Equatable {
       typeSpecificInfo: json['oracle_text'] as String?,
       textBox: json['oracle_text'] as String?,
       rarity: json['rarity'] as String?,
-      setSymbol: json['set'] as String?,
+      set: json['set'] as String?,
       collectorNumber: json['collector_number'] as String?,
       editionName: json['set_name'] as String?,
       legalStatus: json['legalities'] != null ? jsonEncode(json['legalities']) : null,
@@ -110,7 +110,7 @@ class MagicCardModel extends Equatable {
         typeSpecificInfo : typeSpecificInfo ?? this.typeSpecificInfo,
         textBox : textBox ?? this.textBox,
         rarity : rarity ?? this.rarity,
-        setSymbol : setSymbol ?? this.setSymbol,
+        set : setSymbol ?? this.set,
         collectorNumber : collectorNumber ?? this.collectorNumber,
         editionName : editionName ?? this.editionName,
         legalStatus : legalStatus ?? this.legalStatus,
@@ -132,7 +132,7 @@ class MagicCardModel extends Equatable {
         typeSpecificInfo,
         textBox,
         rarity,
-        setSymbol,
+        set,
         collectorNumber,
         editionName,
         legalStatus,
@@ -153,7 +153,7 @@ class MagicCardModel extends Equatable {
         '  Type Specific Info: $typeSpecificInfo,\n'
         '  Text Box: $textBox,\n'
         '  Rarity: $rarity,\n'
-        '  Set Symbol: $setSymbol,\n'
+        '  Set Symbol: $set,\n'
         '  Collector Number: $collectorNumber,\n'
         '  Edition Name: $editionName,\n'
         '  Legal Status: $legalStatus\n'

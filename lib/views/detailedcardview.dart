@@ -2,6 +2,7 @@ import 'package:alexs_magic_card_collector_app/data/cardmodel.dart';
 import 'package:flutter/material.dart';
 
 import '../components/left_menu_drawer.dart';
+import '../services/collectionservice.dart';
 
 class DetailedCardView extends StatefulWidget {
   const DetailedCardView({
@@ -60,22 +61,22 @@ class _DetailedCardViewState extends State<DetailedCardView> {
                         flex: 1,
                       ),
                       Text("Effect:"),
-                      Expanded(flex: 2,
+                      Expanded(
+                        flex: 2,
                         child: SingleChildScrollView(
-                            child: Text(widget.cardModel.textBox!),
+                          child: Text(widget.cardModel.textBox!),
                           scrollDirection: Axis.vertical,
                         ),
                       ),
-
                       Spacer(
                         flex: 1,
                       ),
                       Row(
                         children: [
                           Text(widget.cardModel.rarity!),
+                          Text(widget.cardModel.set!),
                         ],
                       ),
-
                     ],
                   ),
                 )),
@@ -84,20 +85,27 @@ class _DetailedCardViewState extends State<DetailedCardView> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.add),
-          label: "add",
-            tooltip: "Add Card to Collected"
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.remove),
-          label: "remove",
-            tooltip: "Remove Card from Collected"
-          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.add),
+              label: "add",
+              tooltip: "Add Card to Collected"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.remove),
+              label: "remove",
+              tooltip: "Remove Card from Collected"),
         ],
-
-        onTap: (index){
-          if (index == 0){print("add pressed!");}
-          else if (index == 1){print("remove pressed!");}
-
+        onTap: (index) {
+          if (index == 0) {
+            print("add pressed!");
+            Collectionservice.addCardToCollected(
+                set: widget.cardModel.set!,
+                collector_number: widget.cardModel.collectorNumber!);
+          } else if (index == 1) {
+            print("remove pressed!");
+            Collectionservice.removeCardFromCollected(
+                set: widget.cardModel.set!,
+                collector_number: widget.cardModel.collectorNumber!);
+          }
         },
       ),
     );
