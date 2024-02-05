@@ -10,17 +10,29 @@ Future<Widget> searchBar({required Function themeCallBack, required Function upd
   bool isdark = await getThemeFromSharedPrefs();
 
   return SearchAnchor(
+      isFullScreen: false,
+
       builder: (BuildContext context, SearchController controller) {
     return SearchBar(
       controller: controller,
       padding: const MaterialStatePropertyAll<EdgeInsets>(
           EdgeInsets.symmetric(horizontal: 16.0)),
       onTap: () {
-        controller.openView();
+       //
+        // controller.openView();
       },
-      onChanged: (_) {
-        controller.openView();
+      onChanged: (value) async {
+        //List<MagicCardModel> cardModels = await ReadJsonFile.getMagicCardModelViaName(name: value);
+        //updateCardResults(cardModels);
+
       },
+
+      onSubmitted: (value) async {
+        List<MagicCardModel> cardModels = await ReadJsonFile.getMagicCardModelViaName(name: value);
+        print("Debug on Submitted: $cardModels");
+        updateCardResults(cardModels);
+      },
+
       leading: const Icon(Icons.search),
       trailing: <Widget>[
         Tooltip(
@@ -49,28 +61,15 @@ Future<Widget> searchBar({required Function themeCallBack, required Function upd
       return ListTile(
         title: Text(item),
         onTap: () async {
-          MagicCardModel cardModel = await ReadJsonFile.getMagicCardModelViaName(name: item);
-          updateCardResults(cardModel);
-          // Hier können Sie definieren, was passieren soll, wenn ein Vorschlag ausgewählt wird
+          List<MagicCardModel> cardModels = await ReadJsonFile.getMagicCardModelViaName(name: item);
+          updateCardResults(cardModels);
+
           controller.closeView(item);
         },
       );
     }).toList();
 
-
-        /*
-    return List<ListTile>.generate(5, (int index) {
-      final String item = 'item $index';
-      return ListTile(
-        title: Text(item),
-        onTap: () {
-          /*setState(() {
-            controller.closeView(item);
-          });*/
-        },
-      );
-    });
-  */});
+});
 }
 
 Future<void> saveThemeInSharedPrefs(bool isdark) async {

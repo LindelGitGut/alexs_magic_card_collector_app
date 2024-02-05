@@ -1,3 +1,4 @@
+import 'package:alexs_magic_card_collector_app/views/allcards.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -69,8 +70,7 @@ class MyHomePage extends StatefulWidget {
   final String title;
   final Function(bool) themeCallBack;
   List<MagicCardModel> cardresults = [];
-
-
+  List pages =  [allcards];
 
 
   @override
@@ -81,8 +81,13 @@ class _MyHomePageState extends State<MyHomePage> {
   int _showingcards = 0;
   final bool isDark = false;
 
-  void updateCardResults (MagicCardModel cardModel) {
-    widget.cardresults.add(cardModel);
+  void updatePages() {
+    widget.pages.add(allcards(themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults));
+  }
+
+  void updateCardResults (List<MagicCardModel> cardModels) {
+    widget.cardresults = cardModels;
+
     print("updateCardresults aufgerufen! : " +widget.cardresults.toString());
 
   setState(() {
@@ -99,23 +104,9 @@ class _MyHomePageState extends State<MyHomePage> {
         foregroundColor: Colors.deepOrange,
       ),
       drawer: drawerLeft(context),
-      body: Column(
-        children: [
-          FutureBuilder(
-              future: searchBar(themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults),
-              builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
-                if (snapshot.hasData) {
-                  return snapshot.data as Widget;
-                } else {
-                  return ErrorWidget(
-                      Exception("Searchbar has thrown an Error"));
-                }
-              }),
-          SizedBox(height: 20.0,),
-          cardGridView(widget.cardresults, context),
-
-        ],
-      ),
+      body:
+          widget.pages[0](themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults),
     );
+
   }
 }

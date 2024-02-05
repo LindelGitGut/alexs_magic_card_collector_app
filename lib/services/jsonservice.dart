@@ -43,34 +43,47 @@ class ReadJsonFile {
   }
 
 
-  static Future<MagicCardModel> getMagicCardModelViaName({required String name,
+
+
+
+  static Future<List<MagicCardModel>> getMagicCardModelViaName({required String name,
     String path = "lib/assets/card-bulk-example.json",
   }) async {
     final List<Map<dynamic, dynamic>> mappedList =
     await readJsonData(path: path);
-    var result = mappedList.firstWhere(
+    var results = mappedList.where(
           (object) =>
       object.values.contains(name)
     );
+    final List<MagicCardModel> returnresult = [];
 
-    String cardtype = result['type_line'].toString().split("-")[0];
+    print("Debug map getMAgicCardModelviaName List is : $results" );
 
-    return MagicCardModel(
-      name: result['name'],
-      cardType: cardtype,
-      manaCost: result['mana_cost'],
-      colorIdentity: List<String?>.from(result['color_identity'].map((e) => e as String?)),
-      illustrationUrl: await getImgUrl(set: result['set'], collectornumber: result['collector_number']),
-      power: int.parse(result['power']),
-      toughness: int.parse(result['toughness']),
-      typeSpecificInfo: result['oracle_text'] ?? "",
-      textBox: result['oracle_text'],
-      rarity: result['rarity'],
-      //TODO check if Symbol of set can be obtrained
-      set: "",
-      collectorNumber:result['collector_number'],
-      editionName: result['set_name'],
-      legalStatus: result['legalities'] != null ? jsonEncode(result['legalities']) : null,);
+
+    for (var result in results){
+      String cardtype = result['type_line'].toString().split("-")[0];
+      returnresult.add(MagicCardModel(
+        name: result['name'],
+        cardType: cardtype,
+        manaCost: result['mana_cost'],
+        colorIdentity: List<String?>.from(result['color_identity'].map((e) => e as String?)),
+        illustrationUrl: await getImgUrl(set: result['set'], collectornumber: result['collector_number']),
+        power: int.parse(result['power']),
+        toughness: int.parse(result['toughness']),
+        typeSpecificInfo: result['oracle_text'] ?? "",
+        textBox: result['oracle_text'],
+        rarity: result['rarity'],
+        set: result['set'],
+        collectorNumber:result['collector_number'],
+        editionName: result['set_name'],
+        legalStatus: result['legalities'] != null ? jsonEncode(result['legalities']) : null,)
+      );
+    }
+    print("Debug getMagicCardModelViaName List is : $returnresult" );
+
+
+
+    return returnresult;
   }
 
   static Future<MagicCardModel> getMagicCardModel({required String set,
