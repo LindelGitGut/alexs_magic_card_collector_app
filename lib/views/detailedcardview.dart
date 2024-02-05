@@ -82,6 +82,24 @@ class _DetailedCardViewState extends State<DetailedCardView> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.add),
+          label: "add",
+            tooltip: "Add Card to Collected"
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.remove),
+          label: "remove",
+            tooltip: "Remove Card from Collected"
+          ),
+        ],
+
+        onTap: (index){
+          if (index == 0){print("add pressed!");}
+          else if (index == 1){print("remove pressed!");}
+
+        },
+      ),
     );
   }
 }
