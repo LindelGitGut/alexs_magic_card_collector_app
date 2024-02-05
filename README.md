@@ -1,12 +1,21 @@
 # alexs_magic_card_collector_app
 
-Magic Card Collector App
 
+
+
+
+Magic Card Collector App
 
 App for tracking collected Magic The Gathering Cards, Written in Flutter, attempt to use BloC Pattern
 
 (optional: make own API with Springboot, holding Magic Card Bulk Data within Database, (download all Imagefiles and link them corresponding in DB)
 
+
+Current working process:
+
+- Making Layout in Flutter
+- make Mock with example Data in json Format
+- Implement Different Screens
 
 ##TODO
 
