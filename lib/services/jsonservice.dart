@@ -70,7 +70,7 @@ class ReadJsonFile {
 
     final List<MagicCardModel> returnresults = [];
 
-    print("Debug map getMAgicCardModelviaName List is : $results" );
+   // print("Debug map getMAgicCardModelviaName List is : $results" );
 
     for (var result in results){
 
@@ -92,7 +92,7 @@ class ReadJsonFile {
         legalStatus: result['legalities'] != null ? jsonEncode(result['legalities']) : null,)
       );
     }
-    print("Debug getMagicCardModelViaName List is : $returnresults" );
+  //  print("Debug getMagicCardModelViaName List is : $returnresults" );
 
 
 

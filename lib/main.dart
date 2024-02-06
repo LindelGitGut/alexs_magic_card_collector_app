@@ -1,4 +1,5 @@
 import 'package:alexs_magic_card_collector_app/views/allcards.dart';
+import 'package:alexs_magic_card_collector_app/views/collected.dart';
 import 'package:alexs_magic_card_collector_app/views/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -72,7 +73,6 @@ class MyHomePage extends StatefulWidget {
   final String title;
   final Function(bool) themeCallBack;
   List<MagicCardModel> cardresults = [];
-  List pages =  [allcards, wishlList];
 
  
   
@@ -95,11 +95,11 @@ class _MyHomePageState extends State<MyHomePage> {
   
   Widget setPage({String page = "All Cards"}){
     switch(page){
-      case "All Cards" : return widget.pages[0](themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults); break;
-      case "My Collected Cards" : return widget.pages[1](themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults); break;
+      case "All Cards" : return AllCards(themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults); break;
+      case "'My Collected Cards" : return collectedView(themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults); break;
       case "My Card Wishlist" : return wishlList(themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults); break;
-      case "Filtered Search" : return widget.pages[3](themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults); break;
-      default: return widget.pages[0](themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults); break;
+      case "Filtered Search" : return ErrorWidget(Exception("Filtered search not implmented yet"));
+      default: return AllCards(themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults); break;
     }
   }
 

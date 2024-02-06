@@ -20,7 +20,7 @@ Future<Widget> searchBar({required Function themeCallBack, required Function upd
           EdgeInsets.symmetric(horizontal: 16.0)),
       onTap: () {
        //
-        // controller.openView();
+        //controller.openView();
       },
       onChanged: (value) async {
         //List<MagicCardModel> cardModels = await ReadJsonFile.getMagicCardModelViaName(name: value);

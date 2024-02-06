@@ -30,7 +30,8 @@ Widget drawerLeft({
           title: const Text('All Cards'),
           //selected: _selectedIndex == 0,
           onTap: () {
-            setPageStateCallBack("All Cards");
+            setPageStateCallBack(page : "All Cards");
+            Navigator.pop(context);
 
           },
         ),
@@ -39,9 +40,7 @@ Widget drawerLeft({
           title: const Text('My Collected Cards'),
           //selected: _selectedIndex == 0,
           onTap: () {
-            setPageStateCallBack("My Collected Cards");
-            // Update the state of the app
-            // Then close the drawer
+            setPageStateCallBack(page : "My Collected Cards");
             Navigator.pop(context);
           },
         ),
@@ -49,14 +48,7 @@ Widget drawerLeft({
           title: const Text('My Card Wishlist'),
           //selected: _selectedIndex == 1,
           onTap: () {
-
             setPageStateCallBack(page : "My Card Wishlist");
-
-
-
-            // Update the state of the app
-            // _onItemTapped(1);
-            // Then close the drawer
             Navigator.pop(context);
           },
         ),
@@ -64,7 +56,7 @@ Widget drawerLeft({
           title: const Text('Filtered Search'),
           //selected: _selectedIndex == 2,
           onTap: () {
-            setPageStateCallBack("Filtered Search");
+            setPageStateCallBack(page : "Filtered Search");
             Navigator.pop(context);
           },
         ),
