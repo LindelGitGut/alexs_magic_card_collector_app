@@ -15,7 +15,7 @@ Widget collectedView(
           future: searchBar(
               hinttext: "Search in Collected Cards" ,
               themeCallBack: themeCallBack,
-              updateCardResults: updateCardResults),
+              updateCardResults: updateCardResults, allCardCallBack: (){}),
           builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
             if (snapshot.hasData) {
               return snapshot.data as Widget;

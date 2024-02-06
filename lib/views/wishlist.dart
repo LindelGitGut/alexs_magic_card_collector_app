@@ -15,7 +15,7 @@ Widget wishlList(
           future: searchBar(
               hinttext: "Search in Wishlist" ,
               themeCallBack: themeCallBack,
-              updateCardResults: updateCardResults),
+              updateCardResults: updateCardResults, allCardCallBack: (){}),
           builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
             if (snapshot.hasData) {
               return snapshot.data as Widget;

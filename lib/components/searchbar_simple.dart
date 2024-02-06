@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../services/autocomplete.dart';
 import '../services/jsonservice.dart';
 
-Future<Widget> searchBar({required Function themeCallBack, required Function updateCardResults, String hinttext = "Search All Cards"}) async {
+Future<Widget> searchBar({required Function themeCallBack, required Function updateCardResults, String hinttext = "Search All Cards", required Function allCardCallBack}) async {
   bool isdark = await getThemeFromSharedPrefs();
 
   return SearchAnchor(
@@ -32,6 +32,7 @@ Future<Widget> searchBar({required Function themeCallBack, required Function upd
         List<MagicCardModel> cardModels = await ReadJsonFile.getMagicCardModelViaQuery(query: value);
         print("Debug on Submitted: $cardModels");
         updateCardResults(cardModels);
+        allCardCallBack();
       },
 
       leading: const Icon(Icons.search),

@@ -21,6 +21,12 @@ class AllCards extends StatefulWidget {
 }
 
 class _AllCardsState extends State<AllCards> {
+  
+  allCardCallBack(){
+    setState(() {
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,7 +34,7 @@ class _AllCardsState extends State<AllCards> {
         FutureBuilder(
             future: searchBar(
                 themeCallBack: widget.themeCallBack,
-                updateCardResults: widget.updateCardResults),
+                updateCardResults: widget.updateCardResults, allCardCallBack: allCardCallBack),
             builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
               if (snapshot.hasData) {
                 return snapshot.data as Widget;

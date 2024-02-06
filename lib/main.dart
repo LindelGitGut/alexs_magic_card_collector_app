@@ -72,7 +72,6 @@ class MyHomePage extends StatefulWidget {
 
   final String title;
   final Function(bool) themeCallBack;
-  List<MagicCardModel> cardresults = [];
 
  
   
@@ -88,6 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int _showingcards = 0;
   final bool isDark = false;
   late Widget currentpage = setPage(page: "All Cards");
+  List<MagicCardModel> cardresults = [];
+
 
   void setStateCallBack (){setState(() {
 
@@ -95,11 +96,11 @@ class _MyHomePageState extends State<MyHomePage> {
   
   Widget setPage({String page = "All Cards"}){
     switch(page){
-      case "All Cards" : return AllCards(themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults); break;
-      case "'My Collected Cards" : return collectedView(themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults); break;
-      case "My Card Wishlist" : return wishlList(themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults); break;
+      case "All Cards" : return AllCards(themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: cardresults); break;
+      case "'My Collected Cards" : return collectedView(themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: cardresults); break;
+      case "My Card Wishlist" : return wishlList(themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: cardresults); break;
       case "Filtered Search" : return ErrorWidget(Exception("Filtered search not implmented yet"));
-      default: return AllCards(themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults); break;
+      default: return AllCards(themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: cardresults); break;
     }
   }
 
@@ -111,12 +112,12 @@ class _MyHomePageState extends State<MyHomePage> {
  
 
   void updateCardResults (List<MagicCardModel> cardModels) {
-    widget.cardresults = cardModels;
 
-    print("updateCardresults aufgerufen! : " +widget.cardresults.toString());
+
+    print("updateCardresults aufgerufen! : " +cardresults.toString());
 
   setState(() {
-
+    cardresults = cardModels;
   });
   }
 
@@ -132,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
           context: context,
           themeCallBack: widget.themeCallBack,
           updateCardResults: updateCardResults,
-          cardresults: widget.cardresults, setPageStateCallBack: setPageCallBack),
+          cardresults: cardresults, setPageStateCallBack: setPageCallBack),
       body:
       currentpage,
     );
