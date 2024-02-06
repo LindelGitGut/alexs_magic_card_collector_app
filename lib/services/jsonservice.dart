@@ -46,23 +46,36 @@ class ReadJsonFile {
 
 
 
-  static Future<List<MagicCardModel>> getMagicCardModelViaName({required String name,
+  static Future<List<MagicCardModel>> getMagicCardModelViaQuery({required String query,
     String path = "lib/assets/card-bulk-example.json",
   }) async {
     final List<Map<dynamic, dynamic>> mappedList =
     await readJsonData(path: path);
-    var results = mappedList.where(
-          (object) =>
-      object.values.contains(name)
-    );
-    final List<MagicCardModel> returnresult = [];
+
+
+    var results = mappedList.where((Map<dynamic, dynamic> object) {
+      // Test TODO Remove test line
+      bool searchHit = object.entries.any((entry) {
+        // Überprüft, ob der Schlüssel nicht 'all_cards' ist und ob der Wert den Suchbegriff enthält
+        return entry.key != 'all_parts' &&
+            entry.value.toString().toLowerCase().contains(query.toLowerCase());
+      });
+
+      if (searchHit) {
+        print("Searchhit!");
+      }
+
+      return searchHit;
+    }).toList();
+
+    final List<MagicCardModel> returnresults = [];
 
     print("Debug map getMAgicCardModelviaName List is : $results" );
 
-
     for (var result in results){
+
       String cardtype = result['type_line'].toString().split("-")[0];
-      returnresult.add(MagicCardModel(
+      returnresults.add(MagicCardModel(
         name: result['name'],
         cardType: cardtype,
         manaCost: result['mana_cost'],
@@ -79,11 +92,11 @@ class ReadJsonFile {
         legalStatus: result['legalities'] != null ? jsonEncode(result['legalities']) : null,)
       );
     }
-    print("Debug getMagicCardModelViaName List is : $returnresult" );
+    print("Debug getMagicCardModelViaName List is : $returnresults" );
 
 
 
-    return returnresult;
+    return returnresults;
   }
 
   static Future<MagicCardModel> getMagicCardModel({required String set,

@@ -28,7 +28,7 @@ Future<Widget> searchBar({required Function themeCallBack, required Function upd
       },
 
       onSubmitted: (value) async {
-        List<MagicCardModel> cardModels = await ReadJsonFile.getMagicCardModelViaName(name: value);
+        List<MagicCardModel> cardModels = await ReadJsonFile.getMagicCardModelViaQuery(query: value);
         print("Debug on Submitted: $cardModels");
         updateCardResults(cardModels);
       },
@@ -61,7 +61,7 @@ Future<Widget> searchBar({required Function themeCallBack, required Function upd
       return ListTile(
         title: Text(item),
         onTap: () async {
-          List<MagicCardModel> cardModels = await ReadJsonFile.getMagicCardModelViaName(name: item);
+          List<MagicCardModel> cardModels = await ReadJsonFile.getMagicCardModelViaQuery(query: item);
           updateCardResults(cardModels);
 
           controller.closeView(item);
