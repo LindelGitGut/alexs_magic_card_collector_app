@@ -25,7 +25,7 @@ class _DetailedCardViewState extends State<DetailedCardView> {
         centerTitle: true,
         foregroundColor: Colors.deepOrange,
       ),
-      drawer: drawerLeft(context),
+
       body: Center(
         child: Column(
           children: [

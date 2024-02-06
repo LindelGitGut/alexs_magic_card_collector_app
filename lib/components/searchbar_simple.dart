@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../services/autocomplete.dart';
 import '../services/jsonservice.dart';
 
-Future<Widget> searchBar({required Function themeCallBack, required Function updateCardResults}) async {
+Future<Widget> searchBar({required Function themeCallBack, required Function updateCardResults, String hinttext = "Search All Cards"}) async {
   bool isdark = await getThemeFromSharedPrefs();
 
   return SearchAnchor(
@@ -14,6 +14,7 @@ Future<Widget> searchBar({required Function themeCallBack, required Function upd
 
       builder: (BuildContext context, SearchController controller) {
     return SearchBar(
+      hintText: hinttext,
       controller: controller,
       padding: const MaterialStatePropertyAll<EdgeInsets>(
           EdgeInsets.symmetric(horizontal: 16.0)),

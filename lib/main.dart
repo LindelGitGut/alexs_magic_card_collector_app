@@ -1,4 +1,5 @@
 import 'package:alexs_magic_card_collector_app/views/allcards.dart';
+import 'package:alexs_magic_card_collector_app/views/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -37,7 +38,7 @@ class MyApp_State extends State<MyApp> {
           themeCallBack: switchThemeCallBack,
         ));
   }
-
+  
   void switchThemeCallBack(bool isdark) {
     this.isdark = isdark;
     setState(() {});
@@ -48,6 +49,7 @@ class MyApp_State extends State<MyApp> {
         useMaterial3: true,
         brightness: isdark ? Brightness.dark : Brightness.light);
   }
+
 
   void getThemeFromSharedPrefs() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -70,7 +72,12 @@ class MyHomePage extends StatefulWidget {
   final String title;
   final Function(bool) themeCallBack;
   List<MagicCardModel> cardresults = [];
-  List pages =  [allcards];
+  List pages =  [allcards, wishlList];
+
+ 
+  
+ 
+
 
 
   @override
@@ -80,10 +87,28 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _showingcards = 0;
   final bool isDark = false;
+  late Widget currentpage = setPage(page: "All Cards");
 
-  void updatePages() {
-    widget.pages.add(allcards(themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults));
+  void setStateCallBack (){setState(() {
+
+  });}
+  
+  Widget setPage({String page = "All Cards"}){
+    switch(page){
+      case "All Cards" : return widget.pages[0](themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults); break;
+      case "My Collected Cards" : return widget.pages[1](themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults); break;
+      case "My Card Wishlist" : return wishlList(themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults); break;
+      case "Filtered Search" : return widget.pages[3](themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults); break;
+      default: return widget.pages[0](themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults); break;
+    }
   }
+
+  setPageCallBack({String page = "All Cards"}){
+    currentpage = setPage(page: page);
+    setStateCallBack();
+  }
+
+ 
 
   void updateCardResults (List<MagicCardModel> cardModels) {
     widget.cardresults = cardModels;
@@ -103,9 +128,13 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         foregroundColor: Colors.deepOrange,
       ),
-      drawer: drawerLeft(context),
+      drawer: drawerLeft(
+          context: context,
+          themeCallBack: widget.themeCallBack,
+          updateCardResults: updateCardResults,
+          cardresults: widget.cardresults, setPageStateCallBack: setPageCallBack),
       body:
-          widget.pages[0](themeCallBack: widget.themeCallBack, updateCardResults: updateCardResults, context: context, cardresults: widget.cardresults),
+      currentpage,
     );
 
   }
