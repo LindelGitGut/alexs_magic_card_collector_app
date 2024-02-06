@@ -28,12 +28,15 @@ class DetailedViewLoaded extends DetailedViewState {
 
   int currentviewindex;
   MagicCardModel showingmagiccard;
-  MagicCardModel showingmagiccard;
+  MagicCardModel nextmagiccard;
+  MagicCardModel previusmagiccard;
   List<MagicCardModel> navigationelements;
 
   DetailedViewLoaded({required this.showingmagiccard,
     required this.navigationelements,
-    required this.currentviewindex});
+    required this.currentviewindex,
+  required this.nextmagiccard,
+  required this.previusmagiccard});
 
   @override
   List<Object> get props => [showingmagiccard, currentviewindex, showingmagiccard];
