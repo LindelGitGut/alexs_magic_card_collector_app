@@ -13,6 +13,7 @@ App for tracking collected Magic The Gathering Cards, Written in Flutter, attemp
 
 Current working process:
 
+ -Implement Serach Function wich Splitts the input Strings and gives Score for Results
 - Making Layout in Flutter
 - make Mock with example Data in json Format
 - Implement Different Screens
